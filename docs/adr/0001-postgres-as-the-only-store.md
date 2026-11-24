@@ -24,6 +24,8 @@ rows without blocking each other, which is what a queue needs.
 ## Consequences
 
 - Throughput is bounded by Postgres. Session 7 measures where that bound is and documents it.
+- How the guarantees are proven, and why leases need fencing tokens and the database's clock,
+  is decided in ADR 0002.
 - Job tables churn, so vacuum and bloat need attention and monitoring.
 - `LISTEN/NOTIFY` can wake idle workers early, but polling stays as the fallback, so a missed
   notification only adds latency.
